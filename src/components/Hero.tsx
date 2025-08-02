@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
             className="text-2xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400"
             style={{ lineHeight: '1.25', display: 'inline-block', verticalAlign: 'bottom' }}
           >
-            Machine Learning Engineer
+            Machine Learning Engineer And Researcher
           </motion.h2>
           </div>
           <motion.p
@@ -108,16 +108,25 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <motion.button
+          <motion.a
+            href="https://navaneeth-resume.tiiny.site"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300"
           >
             <Download size={20} />
             Download Resume
-          </motion.button>
+          </motion.a>
           
           <motion.button
+            onClick={() => {
+              const element = document.getElementById('contact');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="border-2 border-gray-600 text-gray-300 px-8 py-3 rounded-full font-semibold flex items-center gap-2 hover:border-green-400 hover:text-green-400 transition-all duration-300"
