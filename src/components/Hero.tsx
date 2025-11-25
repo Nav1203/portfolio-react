@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
             className="text-2xl md:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400"
             style={{ lineHeight: '1.25', display: 'inline-block', verticalAlign: 'bottom' }}
           >
-            Machine Learning Engineer And Researcher
+            Research Scientist L1 at Infrrd R&D
           </motion.h2>
           </div>
           <motion.p
