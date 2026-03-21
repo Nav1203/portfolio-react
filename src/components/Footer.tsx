@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
             >
               <h3 className="text-2xl font-bold mb-4">Navaneeth Amarnath</h3>
               <p className="text-gray-400 mb-6 max-w-md">
-                A passionate Machine Learning Engineer specializing in agentic automation, LLMs, and deep learning systems. Let's build intelligent solutions together.
+                A passionate Research Scientist specializing in agentic automation, LLMs, and deep learning systems. Let's build intelligent solutions together.
               </p>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
