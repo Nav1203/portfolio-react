@@ -8,7 +8,8 @@ import {
   Cpu,
   Globe,
   Bot,
-  FileText
+  FileText,
+  Workflow
 } from 'lucide-react';
 
 const Skills: React.FC = () => {
@@ -36,16 +37,26 @@ const Skills: React.FC = () => {
       ]
     },
     {
-      title: 'LLM & Agentic Systems',
+      title: 'LLM',
       icon: Bot,
       skills: [
         { name: 'LLM-based Applications', level: 90 },
         { name: 'Prompt Engineering', level: 85 },
-        { name: 'Agentic Automation', level: 90 },
-        { name: 'Autogen', level: 75 },
         { name: 'Langchain', level: 80 },
         { name: 'Transformers (HuggingFace)', level: 85 },
-        { name: 'PEFT', level: 75 }
+        { name: 'PEFT / Fine-tuning', level: 75 },
+        { name: 'RAG Systems', level: 85 }
+      ]
+    },
+    {
+      title: 'Agentic Frameworks',
+      icon: Workflow,
+      skills: [
+        { name: 'LangGraph', level: 90 },
+        { name: 'CrewAI', level: 80 },
+        { name: 'Claude Agent SDK', level: 90 },
+        { name: 'Autogen', level: 90 },
+        { name: 'Letta', level: 80 }
       ]
     },
     {

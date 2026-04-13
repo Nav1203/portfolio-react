@@ -5,7 +5,13 @@ import { Calendar, MapPin, Mail, Phone, Github, Linkedin } from 'lucide-react';
 const About: React.FC = () => {
   const experiences = [
     {
-      year: '2024 – Present',
+      year: 'Apr 2026 – Present',
+      title: 'Research Scientist L2',
+      company: 'Infrrd',
+      description: 'Leading advanced research initiatives in agentic automation and large-scale AI systems. Driving next-generation intelligent pipelines and mentoring junior researchers.'
+    },
+    {
+      year: '2024 – 2026',
       title: 'Research Scientist L1',
       company: 'Infrrd',
       description: 'Built agentic automation frameworks with multiple collaborating agents. Developed document classification pipelines using Bi-encoders. Created LLM feedback loops using Judge-based extraction refinement. Worked on chatbots, computer vision, and model evaluation pipelines.'
@@ -36,7 +42,7 @@ const About: React.FC = () => {
         >
           <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">About Me</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            I'm an innovative Research Scientist with 2 years of experience at Infrrd, specializing in agentic automation, LLMs, and deep learning systems. I'm passionate about converting complex business problems into intelligent, scalable ML pipelines and generative AI systems.
+            I'm an innovative Research Scientist with 3 years of experience at Infrrd, specializing in agentic automation, LLMs, and deep learning systems. I'm passionate about converting complex business problems into intelligent, scalable ML pipelines and generative AI systems.
           </p>
         </motion.div>
 
