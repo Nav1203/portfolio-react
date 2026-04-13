@@ -109,9 +109,8 @@ const Hero: React.FC = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <motion.a
-            href="https://navaneeth-resume.tiiny.site"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/Navaneeth_resume.pdf"
+            download="Navaneeth_Amarnath_Resume.pdf"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-full font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300"
