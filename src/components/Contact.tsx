@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import TerminalPanel from './TerminalPanel';
 
 const Contact: React.FC = () => {
-
-
   const contactInfo = [
     {
       icon: Mail,
@@ -32,24 +31,28 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-800">
+    <section id="contact" className="py-20 bg-[#080d14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">Get In Touch</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            I'm always interested in hearing about new opportunities and exciting ML/AI projects. 
-            Let's discuss how we can work together!
-          </p>
+          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ open contact_channel</p>
+          <h2 className="text-4xl font-bold text-center text-white mb-6">Get In <span className="text-cyan-200">Touch</span></h2>
+          <TerminalPanel title="contact_socket.sh" className="mx-auto max-w-4xl">
+            <p className="text-xl text-gray-300">
+              <span className="font-mono text-cyan-300">$ open --channel collaboration</span>
+              <br />
+              I'm always interested in hearing about new opportunities and exciting ML/AI projects. 
+              Let's discuss how we can work together!
+            </p>
+          </TerminalPanel>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -57,8 +60,8 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-2xl font-semibold text-white mb-6">Contact Information</h3>
+            <TerminalPanel title="contact_info.env">
+              <h3 className="font-mono text-lg font-semibold uppercase tracking-wide text-cyan-300 mb-6">Contact Information</h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -69,14 +72,14 @@ const Contact: React.FC = () => {
                     viewport={{ once: true }}
                     className="flex items-center space-x-4"
                   >
-                    <div className="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center">
-                      <info.icon className="w-6 h-6 text-green-400" />
+                    <div className="w-12 h-12 bg-slate-900/70 border border-cyan-400/10 rounded flex items-center justify-center">
+                      <info.icon className="w-6 h-6 text-cyan-300/90" />
                     </div>
                     <div>
                       <p className="text-sm text-gray-400">{info.title}</p>
                       <a
                         href={info.link}
-                        className="text-white font-medium hover:text-green-400 transition-colors duration-200"
+                        className="text-white font-medium hover:text-cyan-200 transition-colors duration-200"
                       >
                         {info.value}
                       </a>
@@ -84,9 +87,8 @@ const Contact: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </TerminalPanel>
 
-            {/* Social Links */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Follow Me</h4>
               <div className="flex space-x-4">
@@ -97,7 +99,8 @@ const Contact: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-gray-700 rounded-lg shadow-md flex items-center justify-center hover:bg-green-900 transition-colors duration-200"
+                    className="w-12 h-12 bg-slate-950/50 border border-cyan-400/10 rounded shadow-md flex items-center justify-center hover:bg-cyan-950/50 transition-colors duration-200"
+                    aria-label={social.label}
                   >
                     <social.icon className="w-5 h-5 text-gray-300" />
                   </motion.a>
@@ -105,71 +108,72 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Additional Info */}
-            <div className="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-700">
+            <TerminalPanel title="availability.md">
               <h4 className="text-lg font-semibold text-white mb-4">Let's Work Together</h4>
               <p className="text-gray-300 mb-4">
                 I'm available for ML/AI projects, research collaborations, and exciting opportunities. 
                 Whether you have a project in mind or just want to chat about AI, I'd love to hear from you.
               </p>
               <div className="space-y-2 text-sm text-gray-400">
-                <p>• ML/AI Project Development</p>
-                <p>• Research Collaborations</p>
-                <p>• Model Evaluation & Optimization</p>
+                <p>- ML/AI Project Development</p>
+                <p>- Research Collaborations</p>
+                <p>- Model Evaluation & Optimization</p>
               </div>
-            </div>
+            </TerminalPanel>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gray-900 rounded-xl shadow-lg p-8 border border-gray-700"
           >
-            <h3 className="text-2xl font-semibold text-white mb-6">Send Message</h3>
-            <form
-              action="https://formspree.io/f/xvonakvw"
-              method="POST"
-              className="space-y-6"
-            >
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Your email:
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-400"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Your message:
-                </label>
-                <textarea
-                  name="message"
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 text-white placeholder-gray-400 resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-              
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300 flex items-center justify-center"
+            <TerminalPanel title="send_message.form" bodyClassName="p-8">
+              <h3 className="text-2xl font-semibold text-white mb-6">Send Message</h3>
+              <form
+                action="https://formspree.io/f/xvonakvw"
+                method="POST"
+                className="space-y-6"
               >
-                <Send className="w-5 h-5 mr-2" />
-                Send
-              </motion.button>
-            </form>
+                <div>
+                  <label htmlFor="email" className="block font-mono text-sm font-medium text-cyan-300 mb-2">
+                    email:
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 bg-slate-950/60 border border-cyan-400/10 rounded focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block font-mono text-sm font-medium text-cyan-300 mb-2">
+                    message:
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 bg-slate-950/60 border border-cyan-400/10 rounded focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 text-white placeholder-gray-500 resize-none"
+                    placeholder="Tell me about your project..."
+                  />
+                </div>
+                
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full bg-cyan-300 text-slate-950 py-3 px-6 rounded font-semibold hover:bg-cyan-200 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 flex items-center justify-center"
+                >
+                  <Send className="w-5 h-5 mr-2" />
+                  Send
+                </motion.button>
+              </form>
+            </TerminalPanel>
           </motion.div>
         </div>
       </div>
@@ -177,4 +181,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

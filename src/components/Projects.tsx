@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award } from 'lucide-react';
+import TerminalPanel from './TerminalPanel';
 
 const Expertise: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -123,20 +124,25 @@ const Expertise: React.FC = () => {
     : expertiseAreas.filter(area => area.category === activeFilter);
 
   return (
-    <section id="expertise" className="py-20 bg-gray-900">
+    <section id="expertise" className="py-20 bg-[#05070a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">Areas of Expertise</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Here are some of my key areas of expertise and notable projects. Each represents 
-            deep technical knowledge and practical implementation experience.
-          </p>
+          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ query applied_work</p>
+          <h2 className="text-4xl font-bold text-center text-white mb-6">Areas of <span className="text-cyan-200">Expertise</span></h2>
+          <TerminalPanel title="expertise_index.db" className="mx-auto max-w-4xl">
+            <p className="text-xl text-gray-300">
+              <span className="font-mono text-cyan-300">$ query expertise --notable --applied</span>
+              <br />
+              Here are some of my key areas of expertise and notable projects. Each represents 
+              deep technical knowledge and practical implementation experience.
+            </p>
+          </TerminalPanel>
         </motion.div>
 
         {/* Filter Buttons */}
@@ -153,8 +159,8 @@ const Expertise: React.FC = () => {
               onClick={() => setActiveFilter(filter.value)}
               className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                 activeFilter === filter.value
-                  ? 'bg-green-600 text-white shadow-lg'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20'
+                  : 'bg-slate-950 border border-cyan-400/20 text-gray-300 hover:bg-cyan-950'
               }`}
             >
               {filter.name}
@@ -171,26 +177,22 @@ const Expertise: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-700"
+              className="h-full"
             >
-              <div className="relative p-6 bg-gradient-to-br from-gray-800 to-gray-900 border-b border-gray-700">
-                <div className="flex justify-between items-start mb-4">
+              <TerminalPanel title={`item_${area.id}.md`} className="h-full">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {area.featured && (
-                    <div className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="bg-cyan-300/10 border border-cyan-300/20 text-cyan-200/90 px-3 py-1 rounded text-sm font-mono">
                       Featured
                     </div>
                   )}
                   {area.type === 'publication' && (
-                    <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="bg-cyan-300/10 border border-cyan-300/20 text-cyan-200/90 px-3 py-1 rounded text-sm font-mono">
                       <BookOpen className="w-4 h-4 inline mr-1" />
                       Publication
                     </div>
                   )}
                 </div>
-
-              </div>
-
-              <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">
                   {area.title}
                 </h3>
@@ -198,8 +200,8 @@ const Expertise: React.FC = () => {
                   {area.description}
                 </p>
                 {area.type === 'publication' && area.publication && (
-                  <div className="mb-4 p-3 bg-blue-900/20 border border-blue-700/30 rounded-lg">
-                    <div className="flex items-center text-blue-300 text-sm">
+                  <div className="mb-4 p-3 bg-cyan-300/5 border border-cyan-300/15 rounded">
+                    <div className="flex items-center text-cyan-200/90 text-sm">
                       <Award className="w-4 h-4 mr-2" />
                       Published in: {area.publication}
                     </div>
@@ -209,14 +211,13 @@ const Expertise: React.FC = () => {
                   {area.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-green-900 text-green-300 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-slate-950/40 border border-cyan-400/10 text-cyan-100/80 rounded text-sm font-mono"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-
-              </div>
+              </TerminalPanel>
             </motion.div>
           ))}
         </div>
@@ -227,11 +228,13 @@ const Expertise: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="mt-16"
         >
-          <p className="text-lg text-gray-300 mb-6">
-            Interested in collaborating on AI/ML projects? Let's discuss your requirements!
-          </p>
+          <TerminalPanel title="collaboration_prompt.txt" className="mx-auto max-w-3xl">
+            <p className="text-lg text-gray-300">
+              Interested in collaborating on AI/ML projects? Let's discuss your requirements!
+            </p>
+          </TerminalPanel>
         </motion.div>
       </div>
     </section>

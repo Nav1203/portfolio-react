@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { MapPin, Mail, Phone, Github, Linkedin } from 'lucide-react';
+import TerminalPanel from './TerminalPanel';
 
 const About: React.FC = () => {
   const experiences = [
@@ -31,19 +32,24 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-900">
+    <section id="about" className="py-20 bg-[#05070a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 mb-4">About Me</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            I'm an innovative Research Scientist with 3 years of experience at Infrrd, specializing in agentic automation, LLMs, and deep learning systems. I'm passionate about converting complex business problems into intelligent, scalable ML pipelines and generative AI systems.
-          </p>
+          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ cat about_me</p>
+          <h2 className="text-4xl font-bold text-center text-white mb-6">About <span className="text-cyan-200">Me</span></h2>
+          <TerminalPanel title="about_me.sh" className="mx-auto max-w-4xl">
+            <p className="text-xl text-gray-300">
+              <span className="font-mono text-cyan-300">$ cat profile.md</span>
+              <br />
+              I'm an innovative Research Scientist with 3 years of experience at Infrrd, specializing in agentic automation, LLMs, and deep learning systems. I'm passionate about converting complex business problems into intelligent, scalable ML pipelines and generative AI systems.
+            </p>
+          </TerminalPanel>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -55,52 +61,53 @@ const About: React.FC = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-white mb-6">Personal Information</h3>
-            <div className="space-y-4">
-              {personalInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-4"
-                >
-                  <div className="w-10 h-10 bg-green-900 rounded-full flex items-center justify-center">
-                    <info.icon className="w-5 h-5 text-green-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400">{info.label}</p>
-                    <p className="text-white font-medium">{info.value}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <TerminalPanel title="personal_info.json" className="h-full">
+              <h3 className="font-mono text-lg font-semibold uppercase tracking-wide text-cyan-300 mb-6">Personal Information</h3>
+              <div className="space-y-4">
+                {personalInfo.map((info, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-4"
+                  >
+                    <div className="w-10 h-10 bg-slate-900/70 border border-cyan-400/10 rounded flex items-center justify-center">
+                      <info.icon className="w-5 h-5 text-cyan-300/90" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400">{info.label}</p>
+                      <p className="text-white font-medium">{info.value}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
 
-            {/* Social Links */}
-            <div className="pt-6">
-              <h4 className="text-lg font-semibold text-white mb-4">Follow Me</h4>
-                          <div className="flex space-x-4">
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                href="https://github.com/Nav1203"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-900 transition-colors duration-200"
-              >
-                <Github className="w-5 h-5 text-gray-300" />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                href="https://www.linkedin.com/in/navaneeth-amarnath/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-900 transition-colors duration-200"
-              >
-                <Linkedin className="w-5 h-5 text-gray-300" />
-              </motion.a>
-            </div>
-            </div>
+              <div className="pt-6">
+                <h4 className="font-mono text-sm font-semibold uppercase tracking-wide text-cyan-300 mb-4">Social Links</h4>
+                <div className="flex space-x-4">
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="https://github.com/Nav1203"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-slate-900/70 border border-cyan-400/10 rounded flex items-center justify-center hover:bg-cyan-950/60 transition-colors duration-200"
+                  >
+                    <Github className="w-5 h-5 text-gray-300" />
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="https://www.linkedin.com/in/navaneeth-amarnath/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-slate-900/70 border border-cyan-400/10 rounded flex items-center justify-center hover:bg-cyan-950/60 transition-colors duration-200"
+                  >
+                    <Linkedin className="w-5 h-5 text-gray-300" />
+                  </motion.a>
+                </div>
+              </div>
+            </TerminalPanel>
           </motion.div>
 
           {/* Experience Timeline */}
@@ -111,29 +118,29 @@ const About: React.FC = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-white mb-6">Experience</h3>
-            <div className="space-y-8">
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative"
-                >
-                  <div className="absolute left-0 top-0 w-4 h-4 bg-green-500 rounded-full -ml-2"></div>
-                  <div className="ml-6">
+            <TerminalPanel title="experience.log" className="h-full">
+              <h3 className="font-mono text-lg font-semibold uppercase tracking-wide text-cyan-300 mb-6">Experience</h3>
+              <div className="space-y-8">
+                {experiences.map((exp, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="relative border-l border-cyan-400/20 pl-6"
+                  >
+                    <div className="absolute left-0 top-1 h-3 w-3 -translate-x-1/2 rounded-full bg-cyan-300/80 shadow-lg shadow-cyan-300/20"></div>
                     <div className="flex items-center space-x-2 mb-2">
-                      <span className="text-sm font-medium text-green-400">{exp.year}</span>
+                      <span className="font-mono text-sm font-medium text-cyan-300">{exp.year}</span>
                     </div>
                     <h4 className="text-lg font-semibold text-white">{exp.title}</h4>
-                    <p className="text-green-400 font-medium mb-2">{exp.company}</p>
+                    <p className="text-cyan-200/80 font-medium mb-2">{exp.company}</p>
                     <p className="text-gray-300">{exp.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                  </motion.div>
+                ))}
+              </div>
+            </TerminalPanel>
           </motion.div>
         </div>
 
@@ -143,11 +150,13 @@ const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-16"
         >
-          <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            I'm focused on building intelligent systems that push the boundaries of what's possible with AI and automation. Whether it's through agentic pipelines, generative workflows, or rigorous evaluation tools, I strive to combine practical utility with research-backed solutions. I believe in lifelong learning, reproducible research, and crafting tech that adapts and improves with feedback.
-          </p>
+          <TerminalPanel title="research_focus.txt" className="mx-auto max-w-4xl">
+            <p className="text-lg text-gray-300 leading-relaxed">
+              I'm focused on building intelligent systems that push the boundaries of what's possible with AI and automation. Whether it's through agentic pipelines, generative workflows, or rigorous evaluation tools, I strive to combine practical utility with research-backed solutions. I believe in lifelong learning, reproducible research, and crafting tech that adapts and improves with feedback.
+            </p>
+          </TerminalPanel>
         </motion.div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-scroll';
 
 const Footer: React.FC = () => {
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-[#05070a] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-all duration-300"
+                    className="w-10 h-10 bg-slate-950 border border-cyan-400/10 rounded flex items-center justify-center hover:bg-cyan-950/50 transition-all duration-300"
                   >
                     <social.icon className="w-5 h-5" />
                   </motion.a>
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-300"
+            className="w-10 h-10 bg-cyan-300 text-slate-950 rounded flex items-center justify-center hover:bg-cyan-200 transition-colors duration-300"
           >
             <ArrowUp className="w-5 h-5" />
           </motion.button>
