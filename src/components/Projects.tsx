@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Award } from 'lucide-react';
 import TerminalPanel from './TerminalPanel';
+import TerminalCursor from './TerminalCursor';
 
 const Expertise: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -124,7 +125,7 @@ const Expertise: React.FC = () => {
     : expertiseAreas.filter(area => area.category === activeFilter);
 
   return (
-    <section id="expertise" className="py-20 bg-[#05070a]">
+    <section id="expertise" className="py-[clamp(3.5rem,8vw,5rem)] bg-[#05070a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -133,14 +134,16 @@ const Expertise: React.FC = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ query applied_work</p>
-          <h2 className="text-4xl font-bold text-center text-white mb-6">Areas of <span className="text-cyan-200">Expertise</span></h2>
+          <p className="mb-3 text-center font-mono text-[0.68rem] uppercase tracking-[0.24em] text-cyan-300/70">$ query applied_work</p>
+          <h2 className="text-[clamp(1.8rem,4.5vw,2.45rem)] font-bold text-center text-white mb-6">Areas of <span className="text-cyan-200">Expertise</span></h2>
           <TerminalPanel title="expertise_index.db" className="mx-auto max-w-4xl">
-            <p className="text-xl text-gray-300">
+            <p className="text-[clamp(0.95rem,1.8vw,1.12rem)] text-gray-300">
               <span className="font-mono text-cyan-300">$ query expertise --notable --applied</span>
               <br />
               Here are some of my key areas of expertise and notable projects. Each represents 
               deep technical knowledge and practical implementation experience.
+              <br />
+              <span className="font-mono text-cyan-300">$ &gt;<TerminalCursor /></span>
             </p>
           </TerminalPanel>
         </motion.div>
@@ -151,13 +154,13 @@ const Expertise: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10 sm:mb-12"
         >
           {filters.map((filter) => (
             <button
               key={filter.value}
               onClick={() => setActiveFilter(filter.value)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`px-4 py-2 sm:px-6 rounded font-medium transition-all duration-300 text-sm sm:text-base ${
                 activeFilter === filter.value
                   ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20'
                   : 'bg-slate-950 border border-cyan-400/20 text-gray-300 hover:bg-cyan-950'
@@ -169,7 +172,7 @@ const Expertise: React.FC = () => {
         </motion.div>
 
         {/* Expertise Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {filteredExpertise.map((area, index) => (
             <motion.div
               key={area.id}
@@ -193,7 +196,7 @@ const Expertise: React.FC = () => {
                     </div>
                   )}
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">
+                <h3 className="text-[clamp(1rem,2vw,1.12rem)] font-semibold text-white mb-2">
                   {area.title}
                 </h3>
                 <p className="text-gray-300 mb-4">
@@ -228,7 +231,7 @@ const Expertise: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-16"
+          className="mt-10 sm:mt-16"
         >
           <TerminalPanel title="collaboration_prompt.txt" className="mx-auto max-w-3xl">
             <p className="text-lg text-gray-300">

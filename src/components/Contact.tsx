@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin } from 'lucide-react';
 import TerminalPanel from './TerminalPanel';
+import TerminalCursor from './TerminalCursor';
 
 const Contact: React.FC = () => {
   const contactInfo = [
@@ -10,12 +11,6 @@ const Contact: React.FC = () => {
       title: 'Email',
       value: 'navaneethamarnath@gmail.com',
       link: 'mailto:navaneethamarnath@gmail.com'
-    },
-    {
-      icon: Phone,
-      title: 'Phone',
-      value: '+91 9188590190',
-      link: 'tel:+919188590190'
     },
     {
       icon: MapPin,
@@ -31,7 +26,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-[#080d14]">
+    <section id="contact" className="py-[clamp(3.5rem,8vw,5rem)] bg-[#080d14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,19 +35,21 @@ const Contact: React.FC = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ open contact_channel</p>
-          <h2 className="text-4xl font-bold text-center text-white mb-6">Get In <span className="text-cyan-200">Touch</span></h2>
+          <p className="mb-3 text-center font-mono text-[0.68rem] uppercase tracking-[0.24em] text-cyan-300/70">$ open contact_channel</p>
+          <h2 className="text-[clamp(1.8rem,4.5vw,2.45rem)] font-bold text-center text-white mb-6">Get In <span className="text-cyan-200">Touch</span></h2>
           <TerminalPanel title="contact_socket.sh" className="mx-auto max-w-4xl">
-            <p className="text-xl text-gray-300">
+            <p className="text-[clamp(0.95rem,1.8vw,1.12rem)] text-gray-300">
               <span className="font-mono text-cyan-300">$ open --channel collaboration</span>
               <br />
               I'm always interested in hearing about new opportunities and exciting ML/AI projects. 
               Let's discuss how we can work together!
+              <br />
+              <span className="font-mono text-cyan-300">$ &gt;<TerminalCursor /></span>
             </p>
           </TerminalPanel>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -128,7 +125,7 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <TerminalPanel title="send_message.form" bodyClassName="p-8">
+            <TerminalPanel title="send_message.form" bodyClassName="p-4 sm:p-8">
               <h3 className="text-2xl font-semibold text-white mb-6">Send Message</h3>
               <form
                 action="https://formspree.io/f/xvonakvw"

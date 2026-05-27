@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { MapPin, Mail, Github, Linkedin } from 'lucide-react';
 import TerminalPanel from './TerminalPanel';
+import TerminalCursor from './TerminalCursor';
 
 const About: React.FC = () => {
   const experiences = [
@@ -27,12 +28,11 @@ const About: React.FC = () => {
 
   const personalInfo = [
     { icon: MapPin, label: 'Location', value: 'Bangalore, India' },
-    { icon: Mail, label: 'Email', value: 'navaneethamarnath@gmail.com' },
-    { icon: Phone, label: 'Phone', value: '+91 9188590190' }
+    { icon: Mail, label: 'Email', value: 'navaneethamarnath@gmail.com' }
   ];
 
   return (
-    <section id="about" className="py-20 bg-[#05070a]">
+    <section id="about" className="py-[clamp(3.5rem,8vw,5rem)] bg-[#05070a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,18 +41,20 @@ const About: React.FC = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ cat about_me</p>
-          <h2 className="text-4xl font-bold text-center text-white mb-6">About <span className="text-cyan-200">Me</span></h2>
+          <p className="mb-3 text-center font-mono text-[0.68rem] uppercase tracking-[0.24em] text-cyan-300/70">$ cat about_me</p>
+          <h2 className="text-[clamp(1.8rem,4.5vw,2.45rem)] font-bold text-center text-white mb-6">About <span className="text-cyan-200">Me</span></h2>
           <TerminalPanel title="about_me.sh" className="mx-auto max-w-4xl">
-            <p className="text-xl text-gray-300">
+            <p className="text-[clamp(0.95rem,1.8vw,1.12rem)] text-gray-300">
               <span className="font-mono text-cyan-300">$ cat profile.md</span>
               <br />
               I'm an innovative Research Scientist with 3 years of experience at Infrrd, specializing in agentic automation, LLMs, and deep learning systems. I'm passionate about converting complex business problems into intelligent, scalable ML pipelines and generative AI systems.
+              <br />
+              <span className="font-mono text-cyan-300">$ &gt;<TerminalCursor /></span>
             </p>
           </TerminalPanel>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Personal Information */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -62,7 +64,7 @@ const About: React.FC = () => {
             className="space-y-6"
           >
             <TerminalPanel title="personal_info.json" className="h-full">
-              <h3 className="font-mono text-lg font-semibold uppercase tracking-wide text-cyan-300 mb-6">Personal Information</h3>
+              <h3 className="font-mono text-[clamp(0.92rem,1.8vw,1rem)] font-semibold uppercase tracking-wide text-cyan-300 mb-6">Personal Information</h3>
               <div className="space-y-4">
                 {personalInfo.map((info, index) => (
                   <motion.div
@@ -119,7 +121,7 @@ const About: React.FC = () => {
             className="space-y-6"
           >
             <TerminalPanel title="experience.log" className="h-full">
-              <h3 className="font-mono text-lg font-semibold uppercase tracking-wide text-cyan-300 mb-6">Experience</h3>
+              <h3 className="font-mono text-[clamp(0.92rem,1.8vw,1rem)] font-semibold uppercase tracking-wide text-cyan-300 mb-6">Experience</h3>
               <div className="space-y-8">
                 {experiences.map((exp, index) => (
                   <motion.div
@@ -134,7 +136,7 @@ const About: React.FC = () => {
                     <div className="flex items-center space-x-2 mb-2">
                       <span className="font-mono text-sm font-medium text-cyan-300">{exp.year}</span>
                     </div>
-                    <h4 className="text-lg font-semibold text-white">{exp.title}</h4>
+                    <h4 className="text-[clamp(0.95rem,1.8vw,1.05rem)] font-semibold text-white">{exp.title}</h4>
                     <p className="text-cyan-200/80 font-medium mb-2">{exp.company}</p>
                     <p className="text-gray-300">{exp.description}</p>
                   </motion.div>
@@ -150,7 +152,7 @@ const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="mt-16"
+          className="mt-10 sm:mt-16"
         >
           <TerminalPanel title="research_focus.txt" className="mx-auto max-w-4xl">
             <p className="text-lg text-gray-300 leading-relaxed">

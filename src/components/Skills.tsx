@@ -9,6 +9,7 @@ import {
   Workflow
 } from 'lucide-react';
 import TerminalPanel from './TerminalPanel';
+import TerminalCursor from './TerminalCursor';
 
 const Skills: React.FC = () => {
   const skillCategories = [
@@ -81,7 +82,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-[#080d14]">
+    <section id="skills" className="py-[clamp(3.5rem,8vw,5rem)] bg-[#080d14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,19 +91,21 @@ const Skills: React.FC = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.24em] text-cyan-300/70">$ scan capabilities</p>
-          <h2 className="text-4xl font-bold text-center text-white mb-6">Skills & <span className="text-cyan-200">Expertise</span></h2>
+          <p className="mb-3 text-center font-mono text-[0.68rem] uppercase tracking-[0.24em] text-cyan-300/70">$ scan capabilities</p>
+          <h2 className="text-[clamp(1.8rem,4.5vw,2.45rem)] font-bold text-center text-white mb-6">Skills & <span className="text-cyan-200">Expertise</span></h2>
           <TerminalPanel title="skills_manifest.yml" className="mx-auto max-w-4xl">
-            <p className="text-xl text-gray-300">
+            <p className="text-[clamp(0.95rem,1.8vw,1.12rem)] text-gray-300">
               <span className="font-mono text-cyan-300">$ scan --stack --experience</span>
               <br />
               I've developed expertise across machine learning, LLM systems, and research methodologies. 
               Here's my technical skill set based on my experience:
+              <br />
+              <span className="font-mono text-cyan-300">$ &gt;<TerminalCursor /></span>
             </p>
           </TerminalPanel>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 justify-items-center">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
@@ -114,10 +117,10 @@ const Skills: React.FC = () => {
             >
               <TerminalPanel title={`${category.title.toLowerCase().replace(/\s+/g, '_')}.sh`} className="h-full">
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-slate-900/70 border border-cyan-400/10 rounded flex items-center justify-center mr-4">
-                    <category.icon className="w-6 h-6 text-cyan-300/90" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-900/70 border border-cyan-400/10 rounded flex items-center justify-center mr-4">
+                    <category.icon className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-300/90" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white">{category.title}</h3>
+                  <h3 className="text-[clamp(1rem,2vw,1.12rem)] font-semibold text-white">{category.title}</h3>
                 </div>
 
                 <div className="space-y-4">
@@ -157,7 +160,7 @@ const Skills: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-10 sm:mt-16 text-center"
         >
           <h3 className="text-2xl font-semibold text-white mb-8">Research & Soft Skills</h3>
           <div className="flex flex-wrap justify-center gap-4">
