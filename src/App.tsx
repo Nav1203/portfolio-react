@@ -7,17 +7,25 @@ import Skills from './components/Skills';
 import Expertise from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import TerminalBoot from './components/TerminalBoot';
+import PulseBoot from './components/PulseBoot';
 
 function App() {
-  const [hasBooted, setHasBooted] = useState(false);
-  const completeBoot = useCallback(() => setHasBooted(true), []);
+  const [hasBooted, setHasBooted] = useState(
+    () => typeof window !== 'undefined' && sessionStorage.getItem('hasBooted') === 'true'
+  );
+  // Fixed at mount: true only when the boot animation is about to play on
+  // this page load, so Hero can skip its own type-in and hand off in sync.
+  const [willPlayBoot] = useState(() => !hasBooted);
+  const completeBoot = useCallback(() => {
+    sessionStorage.setItem('hasBooted', 'true');
+    setHasBooted(true);
+  }, []);
 
   return (
     <div className="App">
-      {!hasBooted && <TerminalBoot onComplete={completeBoot} />}
+      {!hasBooted && <PulseBoot onComplete={completeBoot} />}
       <Navbar />
-      <Hero />
+      <Hero skipTypingIntro={willPlayBoot} startSignal={hasBooted || !willPlayBoot} />
       <About />
       <Skills />
       <Expertise />

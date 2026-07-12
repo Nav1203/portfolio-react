@@ -1,1 +1,46 @@
 /* App-specific styles can be added here if needed */
+
+@keyframes pulseBootWaveBar {
+  0%, 100% { height: 2px; }
+  20% { height: 180px; }
+  40% { height: 60px; }
+  60% { height: 140px; }
+  80% { height: 32px; }
+}
+
+@keyframes pulseBootWaveFade {
+  to { opacity: 0; }
+}
+
+@keyframes pulseBootNameIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseBootNameSettle {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-18px); }
+}
+
+@keyframes pulseBootRevealW {
+  from { max-width: 0; }
+  to { max-width: 12ch; }
+}
+
+@keyframes pulseBootGapGrow {
+  from { width: 0; }
+  to { width: 0.3em; }
+}
+
+@keyframes pulseBootLineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes pulseBootSplitUp {
+  to { transform: translateY(-100%); }
+}
+
+@keyframes pulseBootSplitDown {
+  to { transform: translateY(100%); }
+}

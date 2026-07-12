@@ -3,15 +3,27 @@ import { motion } from 'framer-motion';
 import { ChevronDown, Download, Mail } from 'lucide-react';
 import NeuralBackground from './NeuralBackground';
 
-const Hero: React.FC = () => {
-  const [text, setText] = useState('');
+const Hero: React.FC<{ skipTypingIntro?: boolean; startSignal?: boolean }> = ({
+  skipTypingIntro,
+  startSignal = true,
+}) => {
   const fullText = 'Navaneeth Amarnath';
+  const [text, setText] = useState(skipTypingIntro ? fullText : '');
+  // While the boot animation owns the name (its flying copy is landing here),
+  // keep our own copy invisible so the two don't briefly double up.
+  const nameHidden = !!skipTypingIntro && !startSignal;
   const typingSpeed = 150; // milliseconds per character
   const deletingSpeed = 100; // milliseconds per character when deleting
   const pauseTime = 2000; // pause time before starting to delete
 
   useEffect(() => {
-    let currentIndex = 0;
+    // In boot-handoff mode, don't touch the name until the boot signals it has
+    // handed off (the flying name has arrived); then reveal + start typing.
+    if (!startSignal) {
+      return;
+    }
+
+    let currentIndex = skipTypingIntro ? fullText.length : 0;
     let timer: NodeJS.Timeout;
 
     const typeText = () => {
@@ -38,10 +50,18 @@ const Hero: React.FC = () => {
       }
     };
 
-    typeText();
+    if (skipTypingIntro) {
+      // Name just handed off from the boot animation — hold it a beat, then
+      // start the type/delete loop.
+      setText(fullText);
+      timer = setTimeout(deleteText, 900);
+    } else {
+      typeText();
+    }
 
     return () => clearTimeout(timer);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startSignal]);
 
   const scrollToAbout = () => {
     const element = document.getElementById('about');
@@ -71,9 +91,12 @@ const Hero: React.FC = () => {
             </p>
             <h1 className="text-[clamp(2rem,6.2vw,4rem)] font-bold text-white mb-6 sm:mb-8 tracking-normal leading-[1.05]">
               Hi, I'm <br className="sm:hidden" />
-              <span className="relative inline-grid min-w-0 text-cyan-200 align-baseline">
+              <span id="hero-name-slot" className="relative inline-grid min-w-0 text-cyan-200 align-baseline">
                 <span className="invisible col-start-1 row-start-1 whitespace-nowrap">{fullText}</span>
-                <span className="col-start-1 row-start-1 whitespace-nowrap">
+                <span
+                  className="col-start-1 row-start-1 whitespace-nowrap"
+                  style={{ opacity: nameHidden ? 0 : 1 }}
+                >
                   {text}
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
