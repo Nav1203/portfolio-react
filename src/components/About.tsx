@@ -10,7 +10,7 @@ const About: React.FC = () => {
       year: 'Apr 2026 – Present',
       title: 'Research Scientist L2',
       company: 'Infrrd',
-      description: 'Leading advanced research initiatives in agentic automation and large-scale AI systems. Driving next-generation intelligent pipelines and mentoring junior researchers.'
+      description: 'Designed and deployed a harness-based mortgage agent for live post-closing quality control. Ported an internal agentic workflow framework from AutoGen to Claude Agent SDK with a harness-based architecture.'
     },
     {
       year: '2024 – 2026',
@@ -22,7 +22,7 @@ const About: React.FC = () => {
       year: '2023 – 2024',
       title: 'ML Research Intern',
       company: 'Infrrd',
-      description: 'Fine-tuned compact LLMs for NER tasks surpassing SOTA benchmarks. Built RAG-based systems to enhance LLM prompting. Designed datasets and benchmarking tools for ML evaluation.'
+      description: 'Fine-tuned compact LLMs for named entity recognition. Built RAG-based systems to enhance LLM prompting. Designed datasets and benchmarking tools for ML evaluation.'
     }
   ];
 
@@ -47,7 +47,7 @@ const About: React.FC = () => {
             <p className="text-[clamp(0.95rem,1.8vw,1.12rem)] text-gray-300">
               <span className="font-mono text-cyan-300">$ cat profile.md</span>
               <br />
-              I'm an innovative Research Scientist with 3 years of experience at Infrrd, specializing in agentic automation, LLMs, and deep learning systems. I'm passionate about converting complex business problems into intelligent, scalable ML pipelines and generative AI systems.
+              I'm a Research Scientist at Infrrd specializing in agentic automation, large language models, and document intelligence, with end-to-end ownership of deployed systems and research pipelines.
               <br />
               <span className="font-mono text-cyan-300">$ &gt;<TerminalCursor /></span>
             </p>

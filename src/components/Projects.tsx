@@ -9,6 +9,27 @@ const Expertise: React.FC = () => {
 
   const expertiseAreas = [
     {
+      id: 10,
+      title: 'Harness-based Mortgage Agent',
+      description: 'Designed and built a mortgage quality control agent from proof of concept through deployment. Its harness guides the agent through a loan represented as an environment to produce a three-class classification for live post-closing review.',
+      category: 'automation',
+      technologies: ['Agentic AI', 'Mortgage Underwriting', 'Quality Control'],
+      featured: true,
+      type: 'project'
+    },
+    {
+      id: 11,
+      title: 'Planning Agent Assisted Static Workflow Generation for Mortgage Underwriting Automation',
+      description: 'A two-stage multi-agent planning architecture that turns natural-language business rules into deterministic, auditable workflows, demonstrated on self-employed income calculation for mortgage underwriting.',
+      category: 'publication',
+      technologies: ['Agentic AI', 'Business Process Automation', 'Code Generation', 'Information Retrieval'],
+      featured: false,
+      type: 'publication',
+      publication: 'IEEE COMPSAC 2026, pp. 2392–2399',
+      authors: 'S. Nakshathri, N. Amarnath, M. N, P. Rasamsetty and D. Kumar',
+      paperUrl: 'https://doi.org/10.1109/COMPSAC69091.2026.00358'
+    },
+    {
       id: 1,
       title: 'Document Classification Pipeline',
       description: 'A robust pipeline utilizing Bi-Encoder models to efficiently classify documents across diverse categories, significantly improving classification performance.',
@@ -22,9 +43,9 @@ const Expertise: React.FC = () => {
     {
       id: 2,
       title: 'Agentic Automation Framework',
-      description: 'An innovative framework with multiple collaborating agents to automatically plan, design, code, test, and generate modular pipelines from business logic.',
+      description: 'Independently designed a multi-agent framework to plan, design, code, and test workflows from business rules. Built with AutoGen and later ported to Claude Agent SDK with a harness-based architecture; its mortgage underwriting application is presented at COMPSAC 2026.',
       category: 'automation',
-      technologies: ['Python', 'Autogen', 'Langchain', 'LLMs'],
+      technologies: ['Python', 'AutoGen', 'Claude Agent SDK', 'LLMs'],
       liveUrl: 'https://example.com',
       githubUrl: 'https://github.com',
       featured: true,
@@ -66,7 +87,7 @@ const Expertise: React.FC = () => {
     {
       id: 6,
       title: 'NER with Compact LLMs',
-      description: 'Fine-tuned small LLMs to outperform SOTA in Named Entity Recognition on custom datasets, optimizing for both performance and efficiency.',
+      description: 'Fine-tuned compact language models for named entity recognition and built datasets and evaluation pipelines for ML research.',
       category: 'ml',
       technologies: ['Transformers', 'PEFT', 'Python'],
       liveUrl: 'https://example.com',
@@ -95,7 +116,9 @@ const Expertise: React.FC = () => {
       githubUrl: 'https://github.com',
       featured: false,
       type: 'publication',
-      publication: 'SemEval 2024'
+      publication: 'SemEval 2024, pp. 940–951',
+      authors: 'J. He, S. Tallam, S. Nakshathri, N. Amarnath, P. Kr and D. Kumar',
+      paperUrl: 'https://aclanthology.org/2024.semeval-1.136/'
     },
     {
       id: 9,
@@ -107,7 +130,9 @@ const Expertise: React.FC = () => {
       githubUrl: 'https://github.com',
       featured: false,
       type: 'publication',
-      publication: 'IEEE, Jan 2025'
+      publication: 'IEEE CCWC 2025, pp. 209–218',
+      authors: 'N. Amarnath, S. Tallam, P. Rasamsetty and D. Kumar',
+      paperUrl: 'https://doi.org/10.1109/CCWC62904.2025.10903719'
     }
   ];
 
@@ -209,6 +234,14 @@ const Expertise: React.FC = () => {
                       Published in: {area.publication}
                     </div>
                   </div>
+                )}
+                {'authors' in area && area.authors && (
+                  <p className="text-sm text-gray-400 mb-3">{area.authors}</p>
+                )}
+                {'paperUrl' in area && area.paperUrl && (
+                  <a href={area.paperUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-4 text-sm text-cyan-300 underline hover:text-cyan-100">
+                    Read publication
+                  </a>
                 )}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {area.technologies.map((tech, techIndex) => (
