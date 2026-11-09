@@ -3,24 +3,13 @@ import React, { useEffect, useRef } from 'react';
 type FlickerCell = {
   x: number;
   y: number;
-  phase: number;
-  speed: number;
+  start: number;
+  duration: number;
   maxOpacity: number;
 };
 
 const GRID_SIZE = 48;
-const FLICKER_CELLS: FlickerCell[] = [
-  { x: 0.08, y: 0.16, phase: 0.1, speed: 0.0018, maxOpacity: 0.12 },
-  { x: 0.24, y: 0.31, phase: 1.7, speed: 0.0012, maxOpacity: 0.09 },
-  { x: 0.42, y: 0.12, phase: 2.4, speed: 0.0015, maxOpacity: 0.1 },
-  { x: 0.58, y: 0.42, phase: 3.2, speed: 0.001, maxOpacity: 0.08 },
-  { x: 0.76, y: 0.23, phase: 4.1, speed: 0.0014, maxOpacity: 0.1 },
-  { x: 0.91, y: 0.48, phase: 5.5, speed: 0.0011, maxOpacity: 0.11 },
-  { x: 0.18, y: 0.72, phase: 2.8, speed: 0.0013, maxOpacity: 0.09 },
-  { x: 0.49, y: 0.82, phase: 4.9, speed: 0.001, maxOpacity: 0.08 },
-  { x: 0.71, y: 0.76, phase: 1.2, speed: 0.0015, maxOpacity: 0.09 },
-  { x: 0.94, y: 0.68, phase: 3.8, speed: 0.0012, maxOpacity: 0.1 },
-];
+const CELL_COUNT = 18;
 
 const NeuralBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -32,11 +21,29 @@ const NeuralBackground: React.FC = () => {
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let animationFrame = 0;
     let width = 0;
     let height = 0;
     let elapsed = 0;
+    let previousTime: number | null = null;
+    let cells: FlickerCell[] = [];
+
+    const createCell = (start: number, excludedIndex = -1): FlickerCell | null => {
+      const candidates: Array<{ x: number; y: number }> = [];
+      const columns = Math.ceil(width / GRID_SIZE);
+      const rows = Math.ceil(height / GRID_SIZE);
+      for (let y = 0; y < rows; y += 1) {
+        for (let x = 0; x < columns; x += 1) {
+          const tooClose = cells.some((cell, index) => index !== excludedIndex &&
+            Math.abs(cell.x - x) <= 1 && Math.abs(cell.y - y) <= 1);
+          if (!tooClose) candidates.push({ x, y });
+        }
+      }
+      if (!candidates.length) return null;
+      const position = candidates[Math.floor(Math.random() * candidates.length)];
+      return { ...position, start, duration: 2400 + Math.random() * 2400,
+        maxOpacity: 0.10 + Math.random() * 0.08 };
+    };
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -46,6 +53,12 @@ const NeuralBackground: React.FC = () => {
       canvas.width = Math.floor(width * pixelRatio);
       canvas.height = Math.floor(height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      cells = [];
+      for (let index = 0; index < CELL_COUNT; index += 1) {
+        const cell = createCell(elapsed - Math.random() * 2400);
+        if (!cell) break;
+        cells.push(cell);
+      }
     };
 
     const drawGrid = () => {
@@ -78,39 +91,51 @@ const NeuralBackground: React.FC = () => {
     };
 
     const drawFlickerCells = () => {
-      for (const cell of FLICKER_CELLS) {
-        const pulse = reducedMotion ? 0.35 : Math.max(0, Math.sin(elapsed * cell.speed + cell.phase));
+      cells.forEach((cell, index) => {
+        let progress = (elapsed - cell.start) / cell.duration;
+        if (progress >= 1) {
+          const next = createCell(elapsed + Math.random() * 600, index);
+          if (!next) return;
+          cell = next;
+          cells[index] = next;
+          progress = (elapsed - cell.start) / cell.duration;
+        }
+        const pulse = Math.sin(Math.PI * Math.max(0, Math.min(progress, 1)));
         const opacity = pulse * cell.maxOpacity;
-        const x = Math.round((cell.x * width) / GRID_SIZE) * GRID_SIZE;
-        const y = Math.round((cell.y * height) / GRID_SIZE) * GRID_SIZE;
+        const x = cell.x * GRID_SIZE;
+        const y = cell.y * GRID_SIZE;
 
         context.fillStyle = `rgba(103, 232, 249, ${opacity})`;
         context.fillRect(x + 1, y + 1, GRID_SIZE - 2, GRID_SIZE - 2);
-
         context.strokeStyle = `rgba(165, 243, 252, ${opacity * 1.4})`;
         context.strokeRect(x + 0.5, y + 0.5, GRID_SIZE - 1, GRID_SIZE - 1);
-      }
+      });
     };
 
-    const draw = () => {
+    const draw = (time?: number) => {
+      if (time !== undefined) {
+        if (previousTime !== null) elapsed += Math.min(time - previousTime, 100);
+        previousTime = time;
+      }
       context.clearRect(0, 0, width, height);
       drawGrid();
       drawFlickerCells();
       drawNoise();
 
-      if (!reducedMotion) {
-        elapsed += 16;
-        animationFrame = window.requestAnimationFrame(draw);
-      }
+      animationFrame = window.requestAnimationFrame(draw);
     };
 
     resize();
     draw();
 
-    window.addEventListener('resize', resize);
+    const handleResize = () => {
+      resize();
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handleResize);
       window.cancelAnimationFrame(animationFrame);
     };
   }, []);
@@ -125,3 +150,4 @@ const NeuralBackground: React.FC = () => {
 };
 
 export default NeuralBackground;
+
